@@ -1,0 +1,34 @@
+# allow all pods which has swiggy, zomato and zoom label on the namespace which has project=test label
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-nginx
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              project: test
+          podSelector:
+            matchLabels:
+              app: swiggy
+        - namespaceSelector:
+            matchLabels:
+              project: test
+          podSelector:
+            matchLabels:
+              app: zomato
+        - namespaceSelector:
+            matchLabels:
+              project: test
+          podSelector:
+            matchLabels:
+              app: zoom
+      ports:
+        - port: 80
