@@ -1,0 +1,20 @@
+#This NetworkPolicy allows pods with label role=backend to send traffic (egress) to an external IP range -- for example, a public API, load balancer, or external service provider.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-api
+  namespace: your-namespace
+spec:
+  podSelector:
+    matchLabels:
+      role: backend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 203.0.113.0/24
+      ports:
+        - protocol: TCP
+          port: 443
