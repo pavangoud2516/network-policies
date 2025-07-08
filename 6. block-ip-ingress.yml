@@ -1,0 +1,21 @@
+#This policy allows incoming traffic to pods labeled app: nginx from any IP in 192.168.1.0/24, except 192.168.1.5.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-ipblock
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 192.168.1.0/24
+            except:
+              - 192.168.1.5/32
+      ports:
+        - protocol: TCP
+          port: 80
