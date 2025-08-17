@@ -8,3 +8,7 @@ spec:
   policyTypes:
     - Ingress
     - Egress
+  TG
+  AP
+  HYD
+  VZG
