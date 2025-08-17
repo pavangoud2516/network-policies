@@ -10,6 +10,3 @@ spec:
     - name: busybox
       image: alpine/curl
       command: ["sh", "-c", "while true; do curl -m 3  <your clusterIP - IP Address>; sleep 5; done"]
-hi
-hlo
-this is devops class
